@@ -2,11 +2,13 @@
 name: 文献雷达每日推送
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'  # UTC 时间 0:00（北京时间 8:00）
 
 jobs:
   trigger-coze:
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO == '' || vars.LITERATURE_RADAR_AUTO == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: 调用 Coze API
