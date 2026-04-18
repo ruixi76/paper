@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
         run: |
-          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+          curl -X POST https://code.coze.cn/web-sdk/7623618926626209827 \
             -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
