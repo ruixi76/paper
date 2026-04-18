@@ -58,12 +58,12 @@ jobs:
       - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
         run: |
           curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
+            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "bot_id": "${{ secrets.BOT_ID }}",
               "parameters": {
-                "to_email": "zhangruixi@example.com",
+                "to_email": "1372392238@qq.com",
                 "user_profile": {
                   "research_directions": ["Domain Adaptation", "Computer Vision"],
                   "keywords": ["unsupervised domain adaptation", "feature alignment", "adversarial training"],
@@ -75,12 +75,12 @@ jobs:
       - name: 调用文献雷达工作流 (李少辉 - 太赫兹)
         run: |
           curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
+            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "bot_id": "${{ secrets.BOT_ID }}",
               "parameters": {
-                "to_email": "lishaohui@example.com",
+                "to_email": "1372392238@qq.com",
                 "user_profile": {
                   "research_directions": ["Terahertz", "Electromagnetic Wave"],
                   "keywords": ["terahertz imaging", "metasurface", "spectroscopy"],
@@ -92,12 +92,12 @@ jobs:
       - name: 调用文献雷达工作流 (景欣 - 医学图像)
         run: |
           curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
+            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "bot_id": "${{ secrets.BOT_ID }}",
               "parameters": {
-                "to_email": "jingxin@example.com",
+                "to_email": "1372392238@qq.com",
                 "user_profile": {
                   "research_directions": ["Medical Image", "Deep Learning"],
                   "keywords": ["MRI segmentation", "few-shot learning", "attention mechanism"],
