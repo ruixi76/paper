@@ -39,14 +39,69 @@ on:
 jobs:
   trigger-coze:
     runs-on: ubuntu-latest
+    timeout-minutes: 5   # ⚠️ 强制5分钟超时，避免无限等待
+    
+    # steps:
+    #   - name: 调用 Coze API
+    #     run: |
+    #       curl -X POST https://api.coze.cn/open_api/v2/chat \
+    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+    #         -H "Content-Type: application/json" \
+    #         -d '{
+    #           "bot_id": "${{ secrets.BOT_ID }}",
+    #           "user": "system_timer",
+    #           "query": "执行每日文献推送任务"
+    #         }'
+
+    
     steps:
-      - name: 调用 Coze API
+      - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
         run: |
-          curl -X POST https://api.coze.cn/open_api/v2/chat \
-            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "bot_id": "${{ secrets.BOT_ID }}",
-              "user": "system_timer",
-              "query": "执行每日文献推送任务"
+              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "parameters": {
+                "to_email": "zhangruixi@example.com",
+                "user_profile": {
+                  "research_directions": ["Domain Adaptation", "Computer Vision"],
+                  "keywords": ["unsupervised domain adaptation", "feature alignment", "adversarial training"],
+                  "preferred_authors": ["Kate Saenko", "Judy Hoffman"]
+                }
+              }
+            }'
+
+      - name: 调用文献雷达工作流 (李少辉 - 太赫兹)
+        run: |
+          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "parameters": {
+                "to_email": "lishaohui@example.com",
+                "user_profile": {
+                  "research_directions": ["Terahertz", "Electromagnetic Wave"],
+                  "keywords": ["terahertz imaging", "metasurface", "spectroscopy"],
+                  "preferred_authors": ["Peter Uhd Jepsen", "Masayoshi Tonouchi"]
+                }
+              }
+            }'
+
+      - name: 调用文献雷达工作流 (景欣 - 医学图像)
+        run: |
+          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+            -H "Authorization: Bearer ${{ secrets.COZE_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "workflow_id": "${{ secrets.WORKFLOW_ID }}",
+              "parameters": {
+                "to_email": "jingxin@example.com",
+                "user_profile": {
+                  "research_directions": ["Medical Image", "Deep Learning"],
+                  "keywords": ["MRI segmentation", "few-shot learning", "attention mechanism"],
+                  "preferred_authors": ["Dagan Feng", "Pheng-Ann Heng"]
+                }
+              }
             }'
