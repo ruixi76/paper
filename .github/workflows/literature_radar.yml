@@ -1,0 +1,21 @@
+# .github/workflows/literature_radar.yml
+name: 文献雷达每日推送
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # UTC 时间 0:00（北京时间 8:00）
+
+jobs:
+  trigger-coze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 调用 Coze API
+        run: |
+          curl -X POST https://api.coze.cn/open_api/v2/chat \
+            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "bot_id": "${{ secrets.BOT_ID }}",
+              "user": "system_timer",
+              "query": "执行每日文献推送任务"
+            }'
