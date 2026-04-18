@@ -11,7 +11,7 @@ permissions: {}
 jobs:
   trigger-coze:
     # 默认启用定时触发；将仓库变量 LITERATURE_RADAR_AUTO 设为字符串 'false' 可关闭定时触发
-    if: ${{ github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO != 'false' }}
+    if: github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO != 'false'
     runs-on: ubuntu-latest
     steps:
       - name: 调用 Coze API
