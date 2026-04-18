@@ -6,9 +6,11 @@ on:
   schedule:
     - cron: '0 0 * * *'  # UTC 时间 0:00（北京时间 8:00）
 
+permissions: {}
+
 jobs:
   trigger-coze:
-    if: ${{ github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO == '' || vars.LITERATURE_RADAR_AUTO == 'true' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: 调用 Coze API
