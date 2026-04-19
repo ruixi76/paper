@@ -2,11 +2,18 @@
 name: 文献雷达每日推送
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'  # UTC 时间 0:00（北京时间 8:00）
 
+# 本工作流仅调用外部 API，不需要 GITHUB_TOKEN 权限
+permissions: {}
+
 jobs:
   trigger-coze:
+    # 手动触发始终可用；定时触发默认启用，在仓库 Settings -> Secrets and variables -> Actions -> Variables
+    # 将变量 LITERATURE_RADAR_AUTO 设为字符串 'false' 可关闭定时触发
+    if: github.event_name == 'workflow_dispatch' || vars.LITERATURE_RADAR_AUTO != 'false'
     runs-on: ubuntu-latest
     steps:
       - name: 调用 Coze API
