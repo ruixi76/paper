@@ -1,139 +1,47 @@
-# This is a basic workflow to help you get started with Actions
+# 文献雷达每日推送 - GitHub Actions 工作流
+# 每天北京时间8:00（UTC 0:00）自动触发，也可手动运行
 
 name: 文献雷达每日推送
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # 定时触发：每天 UTC 0:00（北京时间 8:00）
+  schedule:
+    - cron: '0 0 * * *'
+  
+  # 允许手动触发
   workflow_dispatch:
-
-# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# jobs:
-#   # This workflow contains a single job called "build"
-#   build:
-#     # The type of runner that the job will run on
-#     runs-on: ubuntu-latest
-
-#     # Steps represent a sequence of tasks that will be executed as part of the job
-#     steps:
-#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#       - uses: actions/checkout@v4
-
-#       # Runs a single command using the runners shell
-#       - name: Run a one-line script
-#         run: echo Hello, world!
-
-#       # Runs a set of commands using the runners shell
-#       - name: Run a multi-line script
-#         run: |
-#           echo Add other actions to build,
-#           echo test, and deploy your project.
-
 
 jobs:
   trigger-coze:
     runs-on: ubuntu-latest
-    timeout-minutes: 5   # ⚠️ 强制5分钟超时，避免无限等待
-    
-    # steps:
-    #   - name: 调用 Coze API
-    #     run: |
-    #       curl -X POST https://api.coze.cn/open_api/v2/chat \
-    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-    #         -H "Content-Type: application/json" \
-    #         -d '{
-    #           "bot_id": "${{ secrets.BOT_ID }}",
-    #           "user": "system_timer",
-    #           "query": "执行每日文献推送任务"
-    #         }'
+    timeout-minutes: 5
 
-    
-    # steps:
-    #   - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
-    #     run: |
-    #       curl -X POST https://code.coze.cn/web-sdk/7623618926626209827 \
-    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-    #         -H "Content-Type: application/json" \
-    #         -d '{
-    #           "bot_id": "${{ secrets.BOT_ID }}",
-    #           "parameters": {
-    #             "to_email": "1372392238@qq.com",
-    #             "user_profile": {
-    #               "research_directions": ["Domain Adaptation", "Computer Vision"],
-    #               "keywords": ["unsupervised domain adaptation", "feature alignment", "adversarial training"],
-    #               "preferred_authors": ["Kate Saenko", "Judy Hoffman"]
-    #             }
-    #           }
-    #         }'
-
-    #   - name: 调用文献雷达工作流 (李少辉 - 太赫兹)
-    #     run: |
-    #       curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-    #         -H "Content-Type: application/json" \
-    #         -d '{
-    #           "bot_id": "${{ secrets.BOT_ID }}",
-    #           "parameters": {
-    #             "to_email": "1372392238@qq.com",
-    #             "user_profile": {
-    #               "research_directions": ["Terahertz", "Electromagnetic Wave"],
-    #               "keywords": ["terahertz imaging", "metasurface", "spectroscopy"],
-    #               "preferred_authors": ["Peter Uhd Jepsen", "Masayoshi Tonouchi"]
-    #             }
-    #           }
-    #         }'
-
-    #   - name: 调用文献雷达工作流 (景欣 - 医学图像)
-    #     run: |
-    #       curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-    #         -H "Content-Type: application/json" \
-    #         -d '{
-    #           "bot_id": "${{ secrets.BOT_ID }}",
-    #           "parameters": {
-    #             "to_email": "1372392238@qq.com",
-    #             "user_profile": {
-    #               "research_directions": ["Medical Image", "Deep Learning"],
-    #               "keywords": ["MRI segmentation", "few-shot learning", "attention mechanism"],
-    #               "preferred_authors": ["Dagan Feng", "Pheng-Ann Heng"]
-    #             }
-    #           }
-    #         }'
-
-
-    
     steps:
       - name: 推送 - 张蕊喜（域自适应）
         run: |
-          # curl -G -L "http://9rhxdv55k2.coze.site/run" \
-          #   -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
-          #   --data-urlencode "to_email=1372392238@qq.com" \
-          #   --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
-          #   --data-urlencode 'keywords=["unsupervised domain adaptation", "feature alignment", "adversarial training"]'
-          curl -G -L "https://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer your-secret-token" \
+          curl -s --max-time 30 \
+            "https://9rhxdv55k2.coze.site/run" \
+            -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
+            -G \
             --data-urlencode "to_email=1372392238@qq.com" \
-            --data-urlencode "research_directions=Domain Adaptation" \
-            --data-urlencode "keywords=unsupervised domain adaptation"
+            --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
+            --data-urlencode 'keywords=["unsupervised domain adaptation", "feature alignment", "adversarial training"]'
         
       - name: 推送 - 李少辉（太赫兹）
         run: |
-          curl -G -L "http://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+          curl -s --max-time 30 \
+            "https://9rhxdv55k2.coze.site/run" \
+            -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
+            -G \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode 'research_directions=["Terahertz", "Electromagnetic Wave"]' \
             --data-urlencode 'keywords=["terahertz imaging", "metasurface", "spectroscopy"]'
-
       - name: 推送 - 景欣（医学图像）
         run: |
-          curl -G -L "http://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+          curl -s --max-time 30 \
+            "https://9rhxdv55k2.coze.site/run" \
+            -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
+            -G \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode 'research_directions=["Medical Image", "Deep Learning"]' \
             --data-urlencode 'keywords=["MRI segmentation", "few-shot learning", "attention mechanism"]'
