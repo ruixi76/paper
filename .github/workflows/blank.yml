@@ -21,6 +21,7 @@ jobs:
         run: |
           curl -s --max-time 30 \
             "https://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_Token }}" \
             -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
@@ -31,6 +32,7 @@ jobs:
         run: |
           curl -s --max-time 30 \
             "https://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_Token }}" \
             -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
@@ -40,6 +42,7 @@ jobs:
         run: |
           curl -s --max-time 30 \
             "https://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_Token }}" \
             -H "X-Trigger-Token: ${{ secrets.API_Token }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
