@@ -111,7 +111,7 @@ jobs:
     steps:
       - name: 推送 - 张蕊喜（域自适应）
         run: |
-          curl -G "http://9rhxdv55k2.coze.site/run" \
+          curl -G -L "http://9rhxdv55k2.coze.site/run" \
             -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
@@ -119,7 +119,7 @@ jobs:
         
       - name: 推送 - 李少辉（太赫兹）
         run: |
-          curl -G "http://9rhxdv55k2.coze.site/run" \
+          curl -G -L "http://9rhxdv55k2.coze.site/run" \
             -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode 'research_directions=["Terahertz", "Electromagnetic Wave"]' \
@@ -127,7 +127,7 @@ jobs:
 
       - name: 推送 - 景欣（医学图像）
         run: |
-          curl -G "http://9rhxdv55k2.coze.site/run" \
+          curl -G -L "http://9rhxdv55k2.coze.site/run" \
             -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode 'research_directions=["Medical Image", "Deep Learning"]' \
