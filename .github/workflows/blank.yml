@@ -54,54 +54,81 @@ jobs:
     #         }'
 
     
+    # steps:
+    #   - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
+    #     run: |
+    #       curl -X POST https://code.coze.cn/web-sdk/7623618926626209827 \
+    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+    #         -H "Content-Type: application/json" \
+    #         -d '{
+    #           "bot_id": "${{ secrets.BOT_ID }}",
+    #           "parameters": {
+    #             "to_email": "1372392238@qq.com",
+    #             "user_profile": {
+    #               "research_directions": ["Domain Adaptation", "Computer Vision"],
+    #               "keywords": ["unsupervised domain adaptation", "feature alignment", "adversarial training"],
+    #               "preferred_authors": ["Kate Saenko", "Judy Hoffman"]
+    #             }
+    #           }
+    #         }'
+
+    #   - name: 调用文献雷达工作流 (李少辉 - 太赫兹)
+    #     run: |
+    #       curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+    #         -H "Content-Type: application/json" \
+    #         -d '{
+    #           "bot_id": "${{ secrets.BOT_ID }}",
+    #           "parameters": {
+    #             "to_email": "1372392238@qq.com",
+    #             "user_profile": {
+    #               "research_directions": ["Terahertz", "Electromagnetic Wave"],
+    #               "keywords": ["terahertz imaging", "metasurface", "spectroscopy"],
+    #               "preferred_authors": ["Peter Uhd Jepsen", "Masayoshi Tonouchi"]
+    #             }
+    #           }
+    #         }'
+
+    #   - name: 调用文献雷达工作流 (景欣 - 医学图像)
+    #     run: |
+    #       curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
+    #         -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
+    #         -H "Content-Type: application/json" \
+    #         -d '{
+    #           "bot_id": "${{ secrets.BOT_ID }}",
+    #           "parameters": {
+    #             "to_email": "1372392238@qq.com",
+    #             "user_profile": {
+    #               "research_directions": ["Medical Image", "Deep Learning"],
+    #               "keywords": ["MRI segmentation", "few-shot learning", "attention mechanism"],
+    #               "preferred_authors": ["Dagan Feng", "Pheng-Ann Heng"]
+    #             }
+    #           }
+    #         }'
+
+
+    
     steps:
-      - name: 调用文献雷达工作流 (张蕊喜 - 域自适应)
+      - name: 推送 - 张蕊喜（域自适应）
         run: |
-          curl -X POST https://code.coze.cn/web-sdk/7623618926626209827 \
-            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "bot_id": "${{ secrets.BOT_ID }}",
-              "parameters": {
-                "to_email": "1372392238@qq.com",
-                "user_profile": {
-                  "research_directions": ["Domain Adaptation", "Computer Vision"],
-                  "keywords": ["unsupervised domain adaptation", "feature alignment", "adversarial training"],
-                  "preferred_authors": ["Kate Saenko", "Judy Hoffman"]
-                }
-              }
-            }'
+          curl -G "http://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            --data-urlencode "to_email=1372392238@qq.com" \
+            --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
+            --data-urlencode 'keywords=["unsupervised domain adaptation", "feature alignment", "adversarial training"]'
+        
+      - name: 推送 - 李少辉（太赫兹）
+        run: |
+          curl -G "http://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            --data-urlencode "to_email=1372392238@qq.com" \
+            --data-urlencode 'research_directions=["Terahertz", "Electromagnetic Wave"]' \
+            --data-urlencode 'keywords=["terahertz imaging", "metasurface", "spectroscopy"]'
 
-      - name: 调用文献雷达工作流 (李少辉 - 太赫兹)
+      - name: 推送 - 景欣（医学图像）
         run: |
-          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "bot_id": "${{ secrets.BOT_ID }}",
-              "parameters": {
-                "to_email": "1372392238@qq.com",
-                "user_profile": {
-                  "research_directions": ["Terahertz", "Electromagnetic Wave"],
-                  "keywords": ["terahertz imaging", "metasurface", "spectroscopy"],
-                  "preferred_authors": ["Peter Uhd Jepsen", "Masayoshi Tonouchi"]
-                }
-              }
-            }'
-
-      - name: 调用文献雷达工作流 (景欣 - 医学图像)
-        run: |
-          curl -X POST https://api.coze.cn/open_api/v2/workflow/run \
-            -H "Authorization: Bearer ${{ secrets.COZE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "bot_id": "${{ secrets.BOT_ID }}",
-              "parameters": {
-                "to_email": "1372392238@qq.com",
-                "user_profile": {
-                  "research_directions": ["Medical Image", "Deep Learning"],
-                  "keywords": ["MRI segmentation", "few-shot learning", "attention mechanism"],
-                  "preferred_authors": ["Dagan Feng", "Pheng-Ann Heng"]
-                }
-              }
-            }'
+          curl -G "http://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            --data-urlencode "to_email=1372392238@qq.com" \
+            --data-urlencode 'research_directions=["Medical Image", "Deep Learning"]' \
+            --data-urlencode 'keywords=["MRI segmentation", "few-shot learning", "attention mechanism"]'
