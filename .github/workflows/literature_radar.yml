@@ -27,7 +27,7 @@ jobs:
           #   --data-urlencode "research_directions=Domain Adaptation,Computer Vision" \
           #   --data-urlencode "keywords=unsupervised domain adaptation,feature alignment,adversarial training"
           curl --location --request POST 'https://9rhxdv55k2.coze.site/run' \
-            --header 'Authorization: Bearer ${{ secrets.SECRET_TOKEN }}' \
+            --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
             --header 'Content-Type: application/json' \
             --data '{"to_email":"1372392238@qq.com","user_profile":{"research_directions":["Domain Adaptation","Computer Vision"],"keywords":["unsupervised domain adaptation","feature alignment","adversarial training"],"preferred_authors":[""]}}'
 
