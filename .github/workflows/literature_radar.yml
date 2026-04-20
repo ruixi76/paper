@@ -21,7 +21,7 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             "https://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode "research_directions=Domain Adaptation,Computer Vision" \
@@ -31,7 +31,7 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             "https://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode "research_directions=Terahertz,Electromagnetic Wave" \
@@ -41,7 +41,7 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             "https://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+            -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
             -G \
             --data-urlencode "to_email=1372392238@qq.com" \
             --data-urlencode "research_directions=Medical Image,Deep Learning" \
