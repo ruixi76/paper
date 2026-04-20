@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: 推送 - 张蕊喜（域自适应）
         run: |
-          curl --location --request POST 'https://9rhxdv55k2.coze.site/run' \
+          curl -s --max-time 30 --location --request POST 'https://9rhxdv55k2.coze.site/run' \
               --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
               --header 'Content-Type: application/json' \
               --data '{
@@ -29,10 +29,9 @@ jobs:
                   "keywords":["unsupervised domain adaptation","feature alignment","adversarial training"],
                   "preferred_authors":[""]
                 }
-              }'
+              }'&
+          PID1=$!
 
-      - name: 推送 - 李少辉（太赫兹）
-        run: |
           curl --location --request POST 'https://9rhxdv55k2.coze.site/run' \
             --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
             --header 'Content-Type: application/json' \
@@ -43,10 +42,9 @@ jobs:
                   "keywords":["terahertz imaging","metasurface","spectroscopy"],
                   "preferred_authors":[""]
               }
-            }'
+            }'&
+          PID2=$!
 
-      - name: 推送 - 景欣（医学图像）
-        run: |
           curl --location --request POST 'https://9rhxdv55k2.coze.site/run' \
             --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
             --header 'Content-Type: application/json' \
@@ -57,4 +55,7 @@ jobs:
                   "keywords":["MRI segmentation","few-shot learning","attention mechanism"],
                   "preferred_authors":[""]
               }
-            }'
+            }'&
+          PID3=$!
+          # 等待全部完成
+          wait $PID1 $PID2 $PID3
