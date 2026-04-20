@@ -111,11 +111,16 @@ jobs:
     steps:
       - name: 推送 - 张蕊喜（域自适应）
         run: |
-          curl -G -L "http://9rhxdv55k2.coze.site/run" \
-            -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+          # curl -G -L "http://9rhxdv55k2.coze.site/run" \
+          #   -H "Authorization: Bearer ${{ secrets.SECRET_TOKEN }}" \
+          #   --data-urlencode "to_email=1372392238@qq.com" \
+          #   --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
+          #   --data-urlencode 'keywords=["unsupervised domain adaptation", "feature alignment", "adversarial training"]'
+          curl -G -L "https://9rhxdv55k2.coze.site/run" \
+            -H "Authorization: Bearer your-secret-token" \
             --data-urlencode "to_email=1372392238@qq.com" \
-            --data-urlencode 'research_directions=["Domain Adaptation", "Computer Vision"]' \
-            --data-urlencode 'keywords=["unsupervised domain adaptation", "feature alignment", "adversarial training"]'
+            --data-urlencode "research_directions=Domain Adaptation" \
+            --data-urlencode "keywords=unsupervised domain adaptation"
         
       - name: 推送 - 李少辉（太赫兹）
         run: |
