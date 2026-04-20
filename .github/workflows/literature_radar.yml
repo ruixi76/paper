@@ -19,34 +19,39 @@ jobs:
     steps:
       - name: 推送 - 张蕊喜（域自适应）
         run: |
-          # curl -s -o /dev/null -w "%{http_code}" \
-          #   "https://9rhxdv55k2.coze.site/run" \
-          #   -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
-          #   -G \
-          #   --data-urlencode "to_email=1372392238@qq.com" \
-          #   --data-urlencode "research_directions=Domain Adaptation,Computer Vision" \
-          #   --data-urlencode "keywords=unsupervised domain adaptation,feature alignment,adversarial training"
-          curl --location --request POST 'https://9rhxdv55k2.coze.site/run' \
             --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
             --header 'Content-Type: application/json' \
-            --data '{"to_email":"1372392238@qq.com","user_profile":{"research_directions":["Domain Adaptation","Computer Vision"],"keywords":["unsupervised domain adaptation","feature alignment","adversarial training"],"preferred_authors":[""]}}'
+            --data '{
+              "to_email":"1372392238@qq.com",
+              "user_profile":{
+                "research_directions":["Domain Adaptation","Computer Vision"],
+                "keywords":["unsupervised domain adaptation","feature alignment","adversarial training"],
+                "preferred_authors":[""]
+              }
+            }'
 
       - name: 推送 - 李少辉（太赫兹）
         run: |
-          curl -s -o /dev/null -w "%{http_code}" \
-            "https://9rhxdv55k2.coze.site/run" \
-            -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
-            -G \
-            --data-urlencode "to_email=1372392238@qq.com" \
-            --data-urlencode "research_directions=Terahertz,Electromagnetic Wave" \
-            --data-urlencode "keywords=terahertz imaging,metasurface,spectroscopy"
+          --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "to_email":"1372392238@qq.com",
+            "user_profile":{
+                "research_directions":["Terahertz","Electromagnetic Wave"],
+                "keywords":["terahertz imaging","metasurface","spectroscopy"],
+                "preferred_authors":[""]
+            }
+          }'
 
       - name: 推送 - 景欣（医学图像）
         run: |
-          curl -s -o /dev/null -w "%{http_code}" \
-            "https://9rhxdv55k2.coze.site/run" \
-            -H "X-Trigger-Token: ${{ secrets.SECRET_TOKEN }}" \
-            -G \
-            --data-urlencode "to_email=1372392238@qq.com" \
-            --data-urlencode "research_directions=Medical Image,Deep Learning" \
-            --data-urlencode "keywords=MRI segmentation,few-shot learning,attention mechanism"
+          --header 'Authorization: Bearer ${{ secrets.API_Token }}' \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "to_email":"1372392238@qq.com",
+            "user_profile":{
+                "research_directions":["Medical Image","Deep Learning"],
+                "keywords":["MRI segmentation","few-shot learning","attention mechanism"],
+                "preferred_authors":[""]
+            }
+          }'
